@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
+import 'package:physik_lp_app_rewrite/core/util/shared_prefrences/shared_prefs_cdots.dart';
 
 import '../../../../../core/util/shared_prefrences/shared_prefs_rendering_engine.dart';
 import '../../../../../injection_container.dart';
@@ -18,6 +20,16 @@ class ArticelRenderer extends StatelessWidget {
     Map<String, dynamic> content_json = json.decode(content);
     content_json.forEach((_key, value) {
       String key = _key.toLowerCase();
+
+      /// Wenn CDot aktiviert ist wird das Zeichen verwendet, sonst \times
+      if (sl<SharedPrefsCDots>().cDotsSetting) {
+        value = value.toString().replaceAll("\\times", "\\cdot");
+      } else {
+        /// Damit alle Artikel immer einhaltlich, entweder \\cdot oder \\times
+        /// verwenden und das nicht gemischt wird
+        value = value.toString().replaceAll("\\cdot", "\\times");
+      }
+
       if (key.startsWith("text")) {
         content_list.add(TeXDocument.text(value));
       } else if (key.startsWith("image")) {

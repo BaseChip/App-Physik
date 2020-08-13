@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
-
 import '../../../core/util/shared_prefrences/shared_prefs_slider.dart';
 import '../../../core/util/shared_prefrences/shared_prefs_theme.dart';
+
 import '../../../injection_container.dart';
 
 class SlidersPage extends StatefulWidget {
@@ -21,16 +21,16 @@ class _SlidersPageState extends State<SlidersPage> {
   /// es bei den slides verwenden zu können
   Color bgColor =
       sl<SharedPrefsTheme>().lastTheme.themeData.scaffoldBackgroundColor;
-  String urlReadMore = "https://github.com/BaseChip";
+  String urlReadMore = "https://github.com/BaseChip/App-Physik";
 
-  ///https://www.freepik.com/vectors/book
+  ///Bilder von: https://www.freepik.com/
   @override
   void initState() {
     super.initState();
     slides.add(new Slide(
         title: "Zusammenfassungen",
         description:
-            "Lies dir zusammenfassungen für alle Abiturrelevanten Themen durch, falls dir dabei ein Thema fehlt kannst du dies gerne ergänzen",
+            "Lies dir Zusammenfassungen für alle abiturrelevanten Themen durch, falls dir dabei ein Thema fehlt kannst du dies gerne ergänzen",
         pathImage: "assets/articel.png",
         backgroundColor: bgColor));
     slides.add(new Slide(
@@ -42,11 +42,13 @@ class _SlidersPageState extends State<SlidersPage> {
     slides.add(new Slide(
         title: "Ergänze",
         description:
-            "Dir fehlt ein Theme in der App? Kein Problem ergänz es einfach, für dich und für alle die, die App benutzen! Um zu erfahren, wie du eigene Artikel in die App hinzufügen kannst lies dir einfach $urlReadMore durch, dort findest du alle Informationen wie du ganz einfach etwas für alle zur App hinzufügst",
+            "Dir fehlt ein Theme in der App? Kein Problem ergänz es einfach, für dich und für alle die, welche die App benutzen! Um zu erfahren, wie du eigene Artikel in die App hinzufügen kannst lies dir einfach $urlReadMore durch, dort findest du alle Informationen wie du ganz einfach etwas für alle zur App hinzufügst",
         pathImage: "assets/articels.png",
         backgroundColor: bgColor));
   }
 
+  ///Speichert, dass jemand das Intro schon bekommen hat und leitet einen auf die
+  ///HomePage weiter
   void onDonePressed() {
     sl<SharedPrefsSlider>().introGot = true;
     Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);

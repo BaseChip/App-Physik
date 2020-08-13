@@ -1,11 +1,13 @@
+/// Need to check if running on web
+import 'package:flutter/foundation.dart' show kIsWeb;
+
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:package_info/package_info.dart';
+import 'package:physik_lp_app_rewrite/core/util/shared_prefrences/shared_prefs_cdots.dart';
 import 'package:physik_lp_app_rewrite/core/util/shared_prefrences/shared_prefs_slider.dart';
 import 'package:physik_lp_app_rewrite/features/notes/presentation/pages/markdown_editor/advanced_editor.dart';
-import 'package:physik_lp_app_rewrite/features/notes/presentation/pages/note_viewer.dart';
-import 'package:physik_lp_app_rewrite/features/notes/presentation/pages/notes_list_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/platform/appinfo.dart';
@@ -56,8 +58,11 @@ Future<void> init() async {
   sl.registerLazySingleton(() => http.Client());
   sl.registerLazySingleton(() => DataConnectionChecker());
   // packageInfo
-  final _packageinfo = await PackageInfo.fromPlatform();
-  sl.registerLazySingleton(() => _packageinfo);
+  if (!kIsWeb) {
+    final _packageinfo = await PackageInfo.fromPlatform();
+    sl.registerLazySingleton(() => _packageinfo);
+  }
+
   // Shared Preferences
   final sharedPreferences = await SharedPreferences.getInstance();
   sl.registerLazySingleton(() => sharedPreferences);
@@ -65,8 +70,14 @@ Future<void> init() async {
 
 void initCore() {
   sl.registerLazySingleton(() => InputConverter());
-  sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
-  sl.registerLazySingleton<AppInfo>(() => AppInfoImpl(sl()));
+  if (!kIsWeb) {
+    sl.registerLazySingleton<AppInfo>(() => AppInfoImpl(packageInfo: sl()));
+    sl.registerLazySingleton<NetworkInfo>(
+        () => NetworkInfoImpl(connectionChecker: sl()));
+  } else {
+    sl.registerLazySingleton<AppInfo>(() => AppInfoImpl());
+    sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl());
+  }
 }
 
 //! FEATURES INITS
@@ -106,6 +117,7 @@ void initFeatureSettingsPage() {
       ));
   sl.registerLazySingleton(() => SharedPrefsTheme(prefs: sl()));
   sl.registerLazySingleton(() => SharedPrefsRenderingEngine(prefs: sl()));
+  sl.registerLazySingleton(() => SharedPrefsCDots(prefs: sl()));
 }
 
 void initFeaturePlot() {

@@ -9,6 +9,11 @@
 Um zu erfahren, wie Artikel für die App erstellt werden, lies dir bitte die [Wiki][wiki] durch. Dort findest du alle Informationen zum erstellen eines Artikels und Beispiele für jeden Artikeltypen der unterstützt wird.
 
 ## Changelog
+* 1.1.3
+    * Added: Web version / checks
+    * Added: CDot option (use \cdot instead of \times)
+    * Fixed: Sub-Menu page title now displays the topics name
+    * Changed: Android Target SDK updated to 29
 * 1.1.2
     * Added: Intro Slider
     * Added: Dark Blue Theme
