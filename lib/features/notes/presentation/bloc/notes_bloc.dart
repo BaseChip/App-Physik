@@ -50,7 +50,7 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
         assert(deleteNote != null),
         assert(getAllNotes != null),
         assert(getNote != null);
-  @override
+
   List<Object> get props =>
       [addNote, changeNote, deleteNote, getAllNotes, getNote];
 

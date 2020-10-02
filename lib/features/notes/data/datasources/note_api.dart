@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
@@ -29,7 +28,7 @@ class NoteApiImpl implements NoteApi {
 
   String get _checkforAuthKey {
     if (sl<SharedPrefsAuth>().logedin) {
-      return sl<SharedPrefsAuth>().auth_key;
+      return sl<SharedPrefsAuth>().authKey;
     } else {
       throw NoAuthKeyGivenException();
     }

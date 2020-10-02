@@ -9,7 +9,6 @@ class ChangeNote {
   final NoteRepository repository;
   ChangeNote({@required this.repository});
 
-  @override
   Future<Either<Failure, Success>> call(int id, String note) async {
     return await repository.changeNote(note, id);
   }

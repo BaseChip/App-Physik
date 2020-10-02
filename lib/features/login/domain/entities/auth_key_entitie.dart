@@ -2,9 +2,9 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 
 class AuthKey extends Equatable {
-  final String auth_key;
+  final String authKey;
 
-  AuthKey({@required this.auth_key});
+  AuthKey({@required this.authKey});
   @override
-  List<Object> get props => [auth_key];
+  List<Object> get props => [authKey];
 }

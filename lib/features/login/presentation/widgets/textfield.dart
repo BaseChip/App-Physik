@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 class LoginTextField extends StatelessWidget {
   final String text;
   final from;
-  final bool obsure_text;
+  final bool obsureText;
   const LoginTextField(
-      {@required this.text, @required this.from, this.obsure_text = false});
+      {@required this.text, @required this.from, this.obsureText = false});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class LoginTextField extends StatelessWidget {
         child: Container(
             width: MediaQuery.of(context).size.width / 1.2,
             child: TextField(
-              obscureText: obsure_text,
+              obscureText: obsureText,
               style: Theme.of(context).primaryTextTheme.button,
               onChanged: (value) {
                 if (text == "Email:") {

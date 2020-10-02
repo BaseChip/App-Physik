@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:physik_lp_app_rewrite/features/notes/presentation/pages/markdown_editor/advanced_editor.dart';
 
 import '../../../../features/login/presentation/pages/login_page.dart';
 import '../../../../features/notes/presentation/pages/notes_list_page.dart';

@@ -5,11 +5,11 @@ class SharedPrefsAuth {
   final SharedPreferences prefs;
   SharedPrefsAuth({@required this.prefs});
 
-  String get auth_key {
+  String get authKey {
     return prefs.getString("auth_key");
   }
 
-  set auth_key(String value) {
+  set authKey(String value) {
     prefs.setString("auth_key", value);
   }
 

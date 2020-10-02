@@ -9,7 +9,6 @@ class GetNote {
   final NoteRepository repository;
   GetNote({@required this.repository});
 
-  @override
   Future<Either<Failure, Note>> call(int id) async {
     return await repository.getNote(id);
   }

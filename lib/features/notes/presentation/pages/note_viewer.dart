@@ -14,32 +14,32 @@ final String errorInitial =
     "Scheint als wäre die Api nicht aufgerufen worden, bitte starte die App noch mal neu";
 
 class NoteViewerPage extends StatefulWidget {
-  final int note_id;
-  NoteViewerPage({@required this.note_id});
+  final int noteId;
+  NoteViewerPage({@required this.noteId});
 
   @override
-  _NoteViewerPageState createState() => _NoteViewerPageState(note_id: note_id);
+  _NoteViewerPageState createState() => _NoteViewerPageState(noteId: noteId);
 }
 
 class _NoteViewerPageState extends State<NoteViewerPage> {
-  final int note_id;
-  String appbar_titel = "Loading";
-  String last_error = "";
-  String note_text = "";
-  _NoteViewerPageState({@required this.note_id});
-  bool made_note_call = false;
+  final int noteId;
+  String appbarTitel = "Loading";
+  String lastError = "";
+  String noteText = "";
+  _NoteViewerPageState({@required this.noteId});
+  bool madeNoteCall = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(appbar_titel),
+        title: Text(appbarTitel),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           AdvancedMarkDownEditor editor = AdvancedMarkDownEditor();
           Future.delayed(Duration(milliseconds: 10), () {
-            editor.state.noteID = note_id;
-            editor.state.textFormFieldText = note_text;
+            editor.state.noteID = noteId;
+            editor.state.textFormFieldText = noteText;
           });
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => editor));
@@ -54,7 +54,7 @@ class _NoteViewerPageState extends State<NoteViewerPage> {
   }
 
   _getNote(BuildContext context) {
-    BlocProvider.of<NotesBloc>(context).add(GetNoteEvent(id: note_id));
+    BlocProvider.of<NotesBloc>(context).add(GetNoteEvent(id: noteId));
   }
 
   BlocProvider<NotesBloc> buildbody(BuildContext context) {
@@ -63,13 +63,13 @@ class _NoteViewerPageState extends State<NoteViewerPage> {
         child: Column(children: <Widget>[
           BlocBuilder<NotesBloc, NotesState>(
             builder: (context, state) {
-              if (!made_note_call) {
-                made_note_call = true;
+              if (!madeNoteCall) {
+                madeNoteCall = true;
                 _getNote(context);
               }
               if (state is NoteError) {
-                if (last_error != state.error) {
-                  last_error = state.error;
+                if (lastError != state.error) {
+                  lastError = state.error;
                   WidgetsBinding.instance.addPostFrameCallback((_) {
                     ErrorDisplayFlushbar()
                         .showErrorFlushbar(context, state.error);
@@ -79,8 +79,8 @@ class _NoteViewerPageState extends State<NoteViewerPage> {
               } else if (state is NoteGot) {
                 SchedulerBinding.instance.addPostFrameCallback((_) {
                   setState(() {
-                    appbar_titel = state.note.title;
-                    note_text = state.note.note;
+                    appbarTitel = state.note.title;
+                    noteText = state.note.note;
                   });
                 });
                 return Expanded(
@@ -108,6 +108,7 @@ class _NoteViewerPageState extends State<NoteViewerPage> {
               } else {
                 return InvisibleWidget();
               }
+              return InvisibleWidget();
             },
           )
         ]));

@@ -9,7 +9,6 @@ class GetAllNotes {
   final NoteRepository repository;
   GetAllNotes({@required this.repository});
 
-  @override
   Future<Either<Failure, NotesList>> call() async {
     return await repository.getAllNotes();
   }

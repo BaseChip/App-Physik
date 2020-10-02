@@ -22,7 +22,7 @@ class NotesPage extends StatefulWidget {
 }
 
 class _NotesPageState extends State<NotesPage> {
-  bool made_notes_call = false;
+  bool madeNotesCall = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,7 +85,7 @@ class _NotesPageState extends State<NotesPage> {
                 /// bevor wir einen Befehl ausführen
                 Future.delayed(Duration(milliseconds: 10), () {
                   /// gibt den Variablen new_note und title die richtigen Werte
-                  editor.state.new_note = true;
+                  editor.state.newNote = true;
                   editor.state.title = title;
 
                   /// setzt als neuen Text den Titel als Überschrift
@@ -107,8 +107,8 @@ class _NotesPageState extends State<NotesPage> {
           BlocBuilder<NotesBloc, NotesState>(
             builder: (context, state) {
               if (sl<SharedPrefsAuth>().logedin) {
-                if (!made_notes_call) {
-                  made_notes_call = true;
+                if (!madeNotesCall) {
+                  madeNotesCall = true;
                   _getAllNotes(context);
                 }
                 if (state is NoteError) {

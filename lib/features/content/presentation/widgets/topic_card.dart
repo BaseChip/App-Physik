@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import '../pages/articels_page.dart';
 
 class TopicCard extends StatelessWidget {
-  final String topic_name;
-  final int topic_id;
-  TopicCard({@required this.topic_name, @required this.topic_id});
+  final String topicName;
+  final int topicId;
+  TopicCard({@required this.topicName, @required this.topicId});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class TopicCard extends StatelessWidget {
             child: ListTile(
                 contentPadding:
                     EdgeInsets.symmetric(horizontal: 26, vertical: 8),
-                title: Text(topic_name,
+                title: Text(topicName,
                     style: Theme.of(context).primaryTextTheme.bodyText1),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
@@ -24,8 +24,8 @@ class TopicCard extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) => ArticelsPage(
-                                themaId: topic_id,
-                                topicName: topic_name,
+                                themaId: topicId,
+                                topicName: topicName,
                               )),
                     ))));
   }

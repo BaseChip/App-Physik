@@ -12,30 +12,30 @@ final String errorInitial =
     "Scheint als wäre die Api nicht aufgerufen worden, bitte starte die App noch mal neu";
 
 class ArticelPage extends StatefulWidget {
-  final int articel_id;
-  ArticelPage({@required this.articel_id});
+  final int articelId;
+  ArticelPage({@required this.articelId});
 
   @override
-  _ArticelPageState createState() => _ArticelPageState(articel_id: articel_id);
+  _ArticelPageState createState() => _ArticelPageState(articelId: articelId);
 }
 
 class _ArticelPageState extends State<ArticelPage> {
-  final int articel_id;
-  String appbar_titel = "Loading";
-  _ArticelPageState({@required this.articel_id});
+  final int articelId;
+  String appbarTitel = "Loading";
+  _ArticelPageState({@required this.articelId});
   bool madearticelsscall = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(appbar_titel),
+        title: Text(appbarTitel),
       ),
       body: buildbody(context),
     );
   }
 
   _getAllArticels(BuildContext context) {
-    BlocProvider.of<ContentBloc>(context).add(GetArticelEvent(id: articel_id));
+    BlocProvider.of<ContentBloc>(context).add(GetArticelEvent(id: articelId));
   }
 
   BlocProvider<ContentBloc> buildbody(BuildContext context) {
@@ -57,7 +57,7 @@ class _ArticelPageState extends State<ArticelPage> {
               } else if (state is ArticelLoaded) {
                 SchedulerBinding.instance.addPostFrameCallback((_) {
                   setState(() {
-                    appbar_titel = state.articel.titel;
+                    appbarTitel = state.articel.titel;
                   });
                 });
                 return ArticelDisplay(

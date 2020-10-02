@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:physik_lp_app_rewrite/core/util/shared_prefrences/shared_prefs_slider.dart';
-import 'package:physik_lp_app_rewrite/features/intro_slider/presentation/slider_page.dart';
-import 'package:physik_lp_app_rewrite/features/notes/presentation/pages/markdown_editor/advanced_editor.dart';
 import 'package:wakelock/wakelock.dart';
 
 import 'core/ui/theme/bloc/theme_bloc.dart';
+import 'core/util/shared_prefrences/shared_prefs_slider.dart';
 import 'features/content/presentation/pages/topics_page.dart';
+import 'features/intro_slider/presentation/slider_page.dart';
 import 'injection_container.dart' as ic;
 import 'injection_container.dart';
 

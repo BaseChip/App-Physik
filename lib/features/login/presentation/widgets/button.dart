@@ -20,7 +20,7 @@ class LoginButton extends StatelessWidget {
                   fontSize: 40),
             ),
             onPressed: () {
-              from.ButtonAction();
+              from.buttonAction();
             }),
       ),
     );

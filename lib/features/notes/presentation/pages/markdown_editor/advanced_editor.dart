@@ -27,7 +27,7 @@ class AdvancedMarkDownEditor extends StatefulWidget {
 }
 
 class _AdvancedMarkDownEditorState extends State<AdvancedMarkDownEditor> {
-  bool new_note = false;
+  bool newNote = false;
   String title;
   int noteID;
 
@@ -165,7 +165,7 @@ class _AdvancedMarkDownEditorState extends State<AdvancedMarkDownEditor> {
   /// allerdings eine neue Notiz ist, wird eine neue Notiz angelegt und man wird
   /// auf die Seite mit allen Notizen weitergeleitet
   void saveNote() async {
-    if (new_note) {
+    if (newNote) {
       BlocProvider.of<NotesBloc>(blocContext)
           .add(AddNoteEvent(title: title, note: _txtController.text));
 
@@ -184,7 +184,7 @@ class _AdvancedMarkDownEditorState extends State<AdvancedMarkDownEditor> {
       /// leitet den User wieder zurück auf die NoteViewerPage und entfernt sich
       /// selber aus dem Speicher
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => NoteViewerPage(note_id: noteID)));
+          builder: (context) => NoteViewerPage(noteId: noteID)));
     }
   }
 
@@ -192,7 +192,7 @@ class _AdvancedMarkDownEditorState extends State<AdvancedMarkDownEditor> {
   void deleteNote() {
     ///Falls die Notiz keine neue Notiz ist wird sie vom Server gelöscht,
     ///andernfalls existiert die Notiz auch noch nicht auf dem Server
-    if (!new_note) {
+    if (!newNote) {
       BlocProvider.of<NotesBloc>(blocContext).add(DeleteNoteEvent(id: noteID));
     }
 

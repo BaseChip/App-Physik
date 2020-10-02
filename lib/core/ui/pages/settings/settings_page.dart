@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:list_tile_switch/list_tile_switch.dart';
-import 'package:physik_lp_app_rewrite/core/ui/pages/settings/widgets/cdots_chooser.dart';
-import 'package:physik_lp_app_rewrite/core/util/shared_prefrences/shared_prefs_cdots.dart';
-import 'package:physik_lp_app_rewrite/features/intro_slider/presentation/slider_page.dart';
-import '../../../../features/login/presentation/pages/delete_account_page.dart';
 
-import '../../../../injection_container.dart';
+import '../../../../features/intro_slider/presentation/slider_page.dart';
+import '../../../../features/login/presentation/pages/delete_account_page.dart';
 import '../../../platform/appinfo.dart';
+import 'widgets/cdots_chooser.dart';
 import 'widgets/drop_down_rendering_engine.dart';
 import 'widgets/widgets.dart';
 
@@ -49,7 +46,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 child: Text("Rendering Engine:",
                     style: Theme.of(context).primaryTextTheme.bodyText1),
               )),
-              Expanded(child: dropDownRenderingEngine())
+              Expanded(child: DropDownRenderingEngine())
             ],
           ),
           Row(
