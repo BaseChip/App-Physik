@@ -39,7 +39,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       : assert(login != null),
         assert(createUser != null),
         assert(deleteUser != null);
-  @override
+
   List<Object> get props => [];
 
   @override

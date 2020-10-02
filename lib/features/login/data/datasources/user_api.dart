@@ -19,8 +19,8 @@ abstract class UserApi {
   /// Eine [WrongCredentialsException] wenn die Anmeldedaten des Nutzers nicht stimmen
   /// Bei jedem anderen Fehler wird eine [ServerException] geworfen
   Future<AuthKey> login(String email, String pw);
-  Future<AuthKey> create_user(String email, String pw);
-  Future<Success> delete_user(String authkey);
+  Future<AuthKey> createUser(String email, String pw);
+  Future<Success> deleteUser(String authkey);
 }
 
 class UserApiImpl implements UserApi {
@@ -29,7 +29,7 @@ class UserApiImpl implements UserApi {
   UserApiImpl({@required this.client});
 
   @override
-  Future<AuthKey> create_user(String email, pw) async {
+  Future<AuthKey> createUser(String email, pw) async {
     final response =
         await client.get("$baseurl/createuser?email=$email&pw=$pw");
     if (response.statusCode == 200) {
@@ -44,7 +44,7 @@ class UserApiImpl implements UserApi {
   }
 
   @override
-  Future<Success> delete_user(String authkey) async {
+  Future<Success> deleteUser(String authkey) async {
     final response = await client
         .delete("$baseurl/delete", headers: {"x-access-token": authkey});
     if (response.statusCode == 200) {

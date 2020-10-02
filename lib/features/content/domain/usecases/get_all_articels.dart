@@ -9,7 +9,6 @@ class GetAllArticels {
   final ContentRepository repository;
   GetAllArticels({@required this.repository});
 
-  @override
   Future<Either<Failure, ArticelsList>> call(int id) async {
     return await repository.getAllArticels(id);
   }

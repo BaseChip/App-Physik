@@ -9,7 +9,6 @@ class Login {
   final LoginRepository repository;
   Login({@required this.repository});
 
-  @override
   Future<Either<Failure, AuthKey>> call(String email, String pw) async {
     return await repository.login(email, pw);
   }

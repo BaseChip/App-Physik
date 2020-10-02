@@ -79,10 +79,10 @@ class _DeleteAccountState extends State<DeleteAccount> {
         ));
   }
 
-  void ButtonAction() {
+  void buttonAction() {
     if (sl<SharedPrefsAuth>().logedin) {
       BlocProvider.of<LoginBloc>(blocContext)
-          .add(DeleteUserEvent(authkey: sl<SharedPrefsAuth>().auth_key));
+          .add(DeleteUserEvent(authkey: sl<SharedPrefsAuth>().authKey));
     } else {
       ErrorDisplayFlushbar().showErrorFlushbar(context,
           "Du bist nicht angemeldet, daher haben wir auch keine Daten von dir gespeichert. Falls du einen Account hast und den löschen möchstes, melde dich bitte erst an und versuche es dann erneut");
@@ -110,7 +110,7 @@ class _DeleteAccountState extends State<DeleteAccount> {
                 /// Wenn das löschen erfolgreich war, wird der auth key gelöscht
                 /// und der Nutzer wieder auf den HomeScreen weitergeleitet
               } else if (state is DeleteSuccess) {
-                sl<SharedPrefsAuth>().auth_key = null;
+                sl<SharedPrefsAuth>().authKey = null;
                 sl<SharedPrefsAuth>().logedin = false;
                 SuccessDisplayFlushbar().showSuccessFlushbar(
                     context, "Account erfolgreich gelöscht");

@@ -54,7 +54,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
               LoginTextField(
                 text: "Password:",
                 from: this,
-                obsure_text: true,
+                obsureText: true,
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 20, 0, 5),
@@ -83,7 +83,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
         ));
   }
 
-  void ButtonAction() {
+  void buttonAction() {
     if (lEmail != null && lPw != null) {
       BlocProvider.of<LoginBloc>(blocContext)
           .add(CreateUserEvent(email: lEmail, pw: lPw));
@@ -121,7 +121,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                 setInitialEvent(blocContext);
               } else if (state is LoginSuccessfull) {
                 setInitialEvent(blocContext);
-                sl<SharedPrefsAuth>().auth_key = state.authkey.auth_key;
+                sl<SharedPrefsAuth>().authKey = state.authkey.authKey;
                 sl<SharedPrefsAuth>().logedin = true;
                 Navigator.push(
                     context, MaterialPageRoute(builder: (context) => MyApp()));

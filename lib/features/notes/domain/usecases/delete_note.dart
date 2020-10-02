@@ -9,7 +9,6 @@ class DeleteNote {
   final NoteRepository repository;
   DeleteNote({@required this.repository});
 
-  @override
   Future<Either<Failure, Success>> call(int id) async {
     return await repository.deleteNote(id);
   }

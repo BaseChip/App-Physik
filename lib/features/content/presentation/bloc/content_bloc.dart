@@ -18,7 +18,8 @@ part 'content_event.dart';
 part 'content_state.dart';
 
 const String SERVER_FAILURE_MESSAGE = "Server Fehler";
-const String CACHE_FAILURE_MESSAGE = "Es scheint als wärst du offline, doch für diese Funktion wird eine Internetverbindung benötigt :(";
+const String CACHE_FAILURE_MESSAGE =
+    "Es scheint als wärst du offline, doch für diese Funktion wird eine Internetverbindung benötigt :(";
 
 class ContentBloc extends Bloc<ContentEvent, ContentState> {
   final GetAllArticels getAllArticels;
@@ -26,29 +27,32 @@ class ContentBloc extends Bloc<ContentEvent, ContentState> {
   final GetArticel getArticel;
 
   /// Da Dart noch keine non nullable Objekte besitzt und keine der Funktionen funktionieren kann,
-  /// falls eine Klasse nicht übergeben wird, überprüfe ich noch einmal, dass kein Objekt null ist 
+  /// falls eine Klasse nicht übergeben wird, überprüfe ich noch einmal, dass kein Objekt null ist
   /// (und somit entweder nicht richtig übergeben wurde oder nicht instanziert)
   /// Dieser Test wird nur hier benötigt, da nach der Clean Architecture nach Uncle Bob der Call Flow
   /// immer nur von der Presentation Ebene kommen kann/darf und somit an keiner anderen Stelle mehr null
   /// Objekte übergben werden können
-  ContentBloc({
-    @required this.getAllArticels,
-    @required this.getAllTopics,
-    @required this.getArticel}) : assert(getArticel != null), assert(getAllTopics != null), assert(getAllArticels != null);
+  ContentBloc(
+      {@required this.getAllArticels,
+      @required this.getAllTopics,
+      @required this.getArticel})
+      : assert(getArticel != null),
+        assert(getAllTopics != null),
+        assert(getAllArticels != null);
 
   @override
   Stream<ContentState> mapEventToState(
     ContentEvent event,
   ) async* {
-    if(event is GetAllArticelsEvent){
+    if (event is GetAllArticelsEvent) {
       yield ContentLoading();
       final failureOrArticels = await getAllArticels(event.id);
       yield* _eitherLoadedArticelsOrErrorState(failureOrArticels);
-    }else if (event is GetAllTopicsEvent){
+    } else if (event is GetAllTopicsEvent) {
       yield ContentLoading();
       final failureOrTopics = await getAllTopics(NoParams());
       yield* _eitherLoadedOrErrorState(failureOrTopics);
-    } else if(event is GetArticelEvent){
+    } else if (event is GetArticelEvent) {
       yield ContentLoading();
       final failureOrArticel = await getArticel(event.id);
       yield* _eitherLoadedArticelOrErrorState(failureOrArticel);
@@ -57,7 +61,7 @@ class ContentBloc extends Bloc<ContentEvent, ContentState> {
 
   Stream<ContentState> _eitherLoadedOrErrorState(
     Either<Failure, Topics> failureOrTopics,
-    ) async* {
+  ) async* {
     yield failureOrTopics.fold(
       (failure) => ContentError(error: _mapFailureToMessage(failure)),
       (topic) => TopicsLoaded(topics: topic),
@@ -66,7 +70,7 @@ class ContentBloc extends Bloc<ContentEvent, ContentState> {
 
   Stream<ContentState> _eitherLoadedArticelsOrErrorState(
     Either<Failure, ArticelsList> failureOrTopics,
-    ) async* {
+  ) async* {
     yield failureOrTopics.fold(
       (failure) => ContentError(error: _mapFailureToMessage(failure)),
       (articels) => ArticelsLoaded(articels: articels),
@@ -75,7 +79,7 @@ class ContentBloc extends Bloc<ContentEvent, ContentState> {
 
   Stream<ContentState> _eitherLoadedArticelOrErrorState(
     Either<Failure, Articel> failureOrTopics,
-    ) async* {
+  ) async* {
     yield failureOrTopics.fold(
       (failure) => ContentError(error: _mapFailureToMessage(failure)),
       (articel) => ArticelLoaded(articel: articel),
@@ -83,19 +87,19 @@ class ContentBloc extends Bloc<ContentEvent, ContentState> {
   }
 
   String _mapFailureToMessage(Failure failure) {
-  switch (failure.runtimeType) {
-    case ServerFailure:
-      return SERVER_FAILURE_MESSAGE;
-    case CacheFailure:
-      return CACHE_FAILURE_MESSAGE;
-    default:
-      return 'Unexpected error';
+    switch (failure.runtimeType) {
+      case ServerFailure:
+        return SERVER_FAILURE_MESSAGE;
+      case CacheFailure:
+        return CACHE_FAILURE_MESSAGE;
+      default:
+        return 'Unexpected error';
+    }
   }
-}
+
   /// Legt fest, dass der UrsprungsState [ContentInitial] ist
   @override
   ContentState get initialState => ContentInitial();
 
-  @override
   List<Object> get props => [];
 }

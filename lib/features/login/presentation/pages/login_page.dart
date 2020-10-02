@@ -54,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
               LoginTextField(
                 text: "Password:",
                 from: this,
-                obsure_text: true,
+                obsureText: true,
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 20, 0, 5),
@@ -85,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
         ));
   }
 
-  void ButtonAction() {
+  void buttonAction() {
     if (lEmail != null && lPw != null) {
       BlocProvider.of<LoginBloc>(blocContext)
           .add(LoginUserEvent(email: lEmail, pw: lPw));
@@ -126,7 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                 /// gespeichert und der Nutzer wieder auf den HomeScreen
                 /// weitergeleitet
               } else if (state is LoginSuccessfull) {
-                sl<SharedPrefsAuth>().auth_key = state.authkey.auth_key;
+                sl<SharedPrefsAuth>().authKey = state.authkey.authKey;
                 sl<SharedPrefsAuth>().logedin = true;
                 SuccessDisplayFlushbar()
                     .showSuccessFlushbar(context, "Erfolgreich angemeldet");

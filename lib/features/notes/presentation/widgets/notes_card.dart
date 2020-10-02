@@ -6,9 +6,9 @@ import '../pages/note_viewer.dart';
 import '../pages/notes_list_page.dart';
 
 class NoteCard extends StatefulWidget {
-  final String note_title;
-  final int note_id;
-  NoteCard({@required this.note_title, @required this.note_id});
+  final String noteTitle;
+  final int noteId;
+  NoteCard({@required this.noteTitle, @required this.noteId});
 
   @override
   _NoteCardState createState() => _NoteCardState();
@@ -18,7 +18,7 @@ class _NoteCardState extends State<NoteCard> {
   @override
   Widget build(BuildContext context) {
     double _opacity = 1.0;
-    String txt = widget.note_title;
+    String txt = widget.noteTitle;
     return Container(
         child: Opacity(
             opacity: _opacity,
@@ -39,8 +39,7 @@ class _NoteCardState extends State<NoteCard> {
                         /// Aus irgendeinem Grund, klappt hier setState nicht, also laden wir
                         /// die Seite einfach neu, aber ohne sie als neue Route
                         /// hinzuzufügen
-                        sl<NotesBloc>()
-                            .add(DeleteNoteEvent(id: widget.note_id));
+                        sl<NotesBloc>().add(DeleteNoteEvent(id: widget.noteId));
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (context) => NotesPage()));
                       }),
@@ -48,7 +47,7 @@ class _NoteCardState extends State<NoteCard> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                NoteViewerPage(note_id: widget.note_id)),
+                                NoteViewerPage(noteId: widget.noteId)),
                       )),
             )));
   }

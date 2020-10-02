@@ -17,13 +17,13 @@ class ArticelsPage extends StatefulWidget {
 
   @override
   _ArticelsPageState createState() =>
-      _ArticelsPageState(thema_id: themaId, topicName: topicName);
+      _ArticelsPageState(themaId: themaId, topicName: topicName);
 }
 
 class _ArticelsPageState extends State<ArticelsPage> {
-  final int thema_id;
+  final int themaId;
   final String topicName;
-  _ArticelsPageState({this.topicName, @required this.thema_id});
+  _ArticelsPageState({this.topicName, @required this.themaId});
   bool madearticelsscall = false;
   @override
   Widget build(BuildContext context) {
@@ -36,8 +36,7 @@ class _ArticelsPageState extends State<ArticelsPage> {
   }
 
   _getAllArticels(BuildContext context) {
-    BlocProvider.of<ContentBloc>(context)
-        .add(GetAllArticelsEvent(id: thema_id));
+    BlocProvider.of<ContentBloc>(context).add(GetAllArticelsEvent(id: themaId));
   }
 
   BlocProvider<ContentBloc> buildbody(BuildContext context) {

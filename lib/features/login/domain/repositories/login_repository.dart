@@ -6,6 +6,6 @@ import '../entities/auth_key_entitie.dart';
 
 abstract class LoginRepository {
   Future<Either<Failure, AuthKey>> login(String email, String pw);
-  Future<Either<Failure, AuthKey>> create_user(String email, String pw);
-  Future<Either<Failure, Success>> delete_user(String auth_key);
+  Future<Either<Failure, AuthKey>> createUser(String email, String pw);
+  Future<Either<Failure, Success>> deleteUser(String authKey);
 }

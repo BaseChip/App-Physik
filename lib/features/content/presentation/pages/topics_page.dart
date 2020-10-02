@@ -22,11 +22,10 @@ class _TopicsPageState extends State<TopicsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Hauptmenü"),
-      ),
-      body: buildbody(context),
-    );
+        appBar: AppBar(
+          title: Text("Hauptmenü"),
+        ),
+        body: buildbody(context));
   }
 
   _getAllTopics(BuildContext context) {

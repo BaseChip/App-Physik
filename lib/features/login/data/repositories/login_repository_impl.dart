@@ -16,10 +16,10 @@ class LoginRepositoryImpl implements LoginRepository {
   LoginRepositoryImpl(
       {@required this.remoteDataSource, @required this.networkInfo});
   @override
-  Future<Either<Failure, AuthKey>> create_user(String email, String pw) async {
+  Future<Either<Failure, AuthKey>> createUser(String email, String pw) async {
     if (await networkInfo.isConnected) {
       try {
-        return Right(await remoteDataSource.create_user(email, pw));
+        return Right(await remoteDataSource.createUser(email, pw));
       } on ServerException {
         return Left(ServerFailure());
       } on UserExistsException {
@@ -33,10 +33,10 @@ class LoginRepositoryImpl implements LoginRepository {
   }
 
   @override
-  Future<Either<Failure, Success>> delete_user(String auth_key) async {
+  Future<Either<Failure, Success>> deleteUser(String authKey) async {
     if (await networkInfo.isConnected) {
       try {
-        return Right(await remoteDataSource.delete_user(auth_key));
+        return Right(await remoteDataSource.deleteUser(authKey));
       } on WrongCredentialsException {
         return Left(WrongCredentialsFailure());
       } on UserDosntExistException {

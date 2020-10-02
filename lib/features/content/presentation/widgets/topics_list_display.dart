@@ -10,14 +10,14 @@ const String OFFLINE_MESSAGE =
 
 class TopicsListDisplay extends StatelessWidget {
   final TopicsLoaded state;
-  bool offline;
+  final bool offline;
   TopicsListDisplay({this.state, this.offline = false});
   @override
   Widget build(BuildContext context) {
     List<Widget> menu = [];
     if (!offline) {
       state.topics.topics.forEach((element) {
-        menu.add(TopicCard(topic_name: element.topic, topic_id: element.id));
+        menu.add(TopicCard(topicName: element.topic, topicId: element.id));
       });
     } else {
       menu.add(Padding(

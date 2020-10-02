@@ -9,8 +9,7 @@ class CreateUser {
   final LoginRepository repository;
   CreateUser({@required this.repository});
 
-  @override
   Future<Either<Failure, AuthKey>> call(String email, String pw) async {
-    return await repository.create_user(email, pw);
+    return await repository.createUser(email, pw);
   }
 }
